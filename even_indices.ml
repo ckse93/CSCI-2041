@@ -65,3 +65,16 @@ let fill_array arr elem =
     arr.(i) <- elem;
     done
 ;;
+
+let in_between lst small big =
+let rec helper in_lst appen_list =
+  let hed = List.hd in_lst in
+  if in_lst = [] then []@appen_list
+  else if (hed <= small && hed >= big) then   let tail = List.tl in_lst in
+                                              let new_append_lst = hed@appen_list in
+                                              helper tail new_append_lst
+  else helper (List.tl in_lst) appen_list
+in
+helper lst []
+;;
+(*for some reason small and big are taken as lists. fix this *)
