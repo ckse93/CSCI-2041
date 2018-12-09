@@ -4,17 +4,17 @@ let rec even_list_indicies in_list=
   match in_list with
   | [] -> []
   | head :: [] -> [head]
-  | head :: middle :: tail -> head :: even_indicies tail
+  | head :: middle :: tail -> head :: even_list_indicies tail
   ;;
 
 let rec odd_list_indicies in_list =
   match in_list with
   | [] -> []
   | head :: [] -> []
-  | even :: odd :: tail -> odd :: odd_indicies tail
+  | even :: odd :: tail -> odd :: odd_list_indicies tail
 ;;
-  even_indicies lst;;
-  odd_indicies lst;;
+  even_list_indicies lst;;
+  odd_list_indicies lst;;
 
 let hi_order_sum_list in_list =
   List.fold_left (+) 0 in_list
@@ -29,3 +29,39 @@ let sum_list in_list =
   helper 0 in_list
 ;;
 sum_list lst;;
+
+let decreasing =[9;8;7;6;5;4;3;2;1];;
+
+let is_decreasing in_list =
+  if in_list = [] then true
+  else
+    let rec helper lst =
+      if List.tl lst = [] then true
+      else
+      let tail = List.tl lst in
+        if List.hd lst > List.hd tail then
+        helper (List.tl lst)
+        else false
+    in
+  helper in_list
+;;
+
+let is_increasing in_list =
+  if in_list = [] then true
+  else
+    let rec helper lst=
+      if lst = [] then true
+      else
+        let tail = List.tl lst in
+          if List.hd lst < List.hd tail then
+          helper (List.tl lst)
+          else false
+    in
+  helper in_list
+;;
+
+let fill_array arr elem =
+  for i=0 to (Array.length arr)-1 do
+    arr.(i) <- elem;
+    done
+;;
